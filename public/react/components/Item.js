@@ -10,6 +10,7 @@ export const Item = ({item, fetchItemData}) => {
       <h3 >{item.title}</h3>
       <br></br>
       <img src={item.image} alt={item.title} onClick={() => fetchItemData(item)}/>
+      <h4 className="list-price">${item.price}</h4>
     </div>
   </>
 } 

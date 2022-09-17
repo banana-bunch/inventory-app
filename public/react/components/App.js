@@ -11,7 +11,7 @@ export const App = () => {
 	const [items, setItems] = useState([]);
 
 	// array of objects, each object is an item, initial seed data had 20 items (id 1-20)
-	console.log(items)
+	// console.log(items)
 
 	// if singleItem is true, SingleItem component will render 
 	const [singleItem, setSingleItem] = useState(null);
@@ -44,9 +44,9 @@ export const App = () => {
 		<main>
 			{
 				singleItem ? (
-					<SingleItem singleItem={singleItem} setSingleItem={setSingleItem}/>
+					<SingleItem singleItem={singleItem} setSingleItem={setSingleItem} items={items} setItems={setItems}/>
 				) :  addItems ? (
-					< Form addItems={addItems} setAddItems={setAddItems}/>
+					< Form addItems={addItems} setAddItems={setAddItems} items={items} setItems={setItems}/>
 				) : <section>
 						<div className="store">
 							<h1>Banana Bunch R Us</h1>

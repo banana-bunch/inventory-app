@@ -23,5 +23,29 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST /items - when form is submitted, item is created and added to list
+router.post("/", async (req, res, next) => {
+  try {
+    const item = await Item.create(req.body);
+    res.send(item)
+  } catch (err) {
+    console.log("add item error", err)
+  }
+});
+
+// DELETE /items/:id - on single view, when delete button is clicked, entire item is deleted from item list
+router.delete("/:id", async (req, res) => {
+  try {
+    await Item.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+
+    const items = await Item.findAll();
+    res.send(items)
+  } catch (err) {
+    console.log("delete error", err)
+  }
+})
 
 module.exports = router;

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 
 import apiURL from '../api';
 
-export function Form ({addItems, setAddItems}) {
+export function Form ({addItems, setAddItems, items, setItems}) {
 
 
     const [title, setTitle] = useState("");
@@ -22,10 +22,9 @@ export function Form ({addItems, setAddItems}) {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(
-            //   articleData // our data TO CREATE here
             {
                 title: title,
-                price: content,
+                price: price,
                 description: description,
                 category: category,
                 image: image
@@ -35,21 +34,24 @@ export function Form ({addItems, setAddItems}) {
           const data = await response.json();
 
         //   console.log(data.title)
-        //   I need lines 49-51 if not I have to manually refresh to see the new submitted page
-        //   setPages([...pages,
-        //         data
-        //     ]);
+        //   I need bottom code if not I have to manually refresh to see the new submitted page
+        // ! React expects a completely new value - I need to use spread syntax to render a new array (new array will have brand new item created when clicking the submit button)
+          setItems([...items,
+                data
+            ]);
 
             setTitle("");
             setPrice("");
             setDescription("");
             setCategory("");
             setImage("");
+
+            setAddItems(false)
+
         } catch (err) {
             console.log("form error", err)
         }  
 
-        setAddItems(false)
 	  }
 
     return (
