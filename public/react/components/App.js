@@ -19,6 +19,9 @@ export const App = () => {
 	// if addItems is true, Form component will render 
 	const [addItems, setAddItems] = useState(false);
 
+	// if updateItem is true within the SingleItem component, Update component will render
+	const [updateItem, setUpdateItem] = useState(false);
+
 	async function fetchItems(){
 		try {
 			const response = await fetch(`${apiURL}/items`);
@@ -44,7 +47,7 @@ export const App = () => {
 		<main>
 			{
 				singleItem ? (
-					<SingleItem singleItem={singleItem} setSingleItem={setSingleItem} items={items} setItems={setItems}/>
+					<SingleItem singleItem={singleItem} setSingleItem={setSingleItem} items={items} setItems={setItems} updateItem={updateItem} setUpdateItem={setUpdateItem}/>
 				) :  addItems ? (
 					< Form addItems={addItems} setAddItems={setAddItems} items={items} setItems={setItems}/>
 				) : <section>
