@@ -1,17 +1,21 @@
 import React, {useState} from "react";
 
 import apiURL from '../api';
+import Navbar from "./NavBar";
 
 export function Form ({addItems, setAddItems, items, setItems}) {
 
 
     const [title, setTitle] = useState("");
-    const [price, setPrice] = useState(0.00);
+    const [price, setPrice] = useState("price: ", 0.00);
 
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
 
     const [image, setImage] = useState("");
+
+    const [rating, setRating] = useState("rating", 0);
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -27,7 +31,8 @@ export function Form ({addItems, setAddItems, items, setItems}) {
                 price: price,
                 description: description,
                 category: category,
-                image: image
+                image: image,
+                rating: rating
             }
             )
           });
@@ -45,6 +50,7 @@ export function Form ({addItems, setAddItems, items, setItems}) {
             setDescription("");
             setCategory("");
             setImage("");
+            setRating("")
 
             setAddItems(false)
 
@@ -56,28 +62,45 @@ export function Form ({addItems, setAddItems, items, setItems}) {
 
     return (
         <>
-            <h1>BB R Us</h1>
-            <h2>Add an Item</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                <input placeholder="Title" type="text" aria-label="title" value={title} onChange={event => setTitle(event.target.value)}/>
-                </div>
-                <div>
-                <input placeholder="Item Price" type="number" min="0" step="any" aria-label="item-price" value={price} onChange={event => setPrice(event.target.value)} />
-                </div>
-                <div>
-                <input placeholder="Item Description" type="text" aria-label="item-description" value={description} onChange={event => setDescription(event.target.value)} />
-                </div>
-                <div>
-                <input placeholder="Item Category" type="text" aria-label="item-category" value={category} onChange={event => setCategory(event.target.value)} />
-                </div>
-                <div>
-                <input placeholder="Image" type="text" aria-label="item-image" value={image} onChange={event => setImage(event.target.value)} />
-                </div>
-                <br></br>
-                <button type="submit" >Add Item to List!</button>
-                <button onClick={() => setAddItems(false)}>Back to Item List!</button>
-            </form>
+             <Navbar setAddItems={setAddItems} addItems={addItems}/>
+            <div className="container d-flex flex-column justify-content-center align-items-center my-5">
+                <h2 className="my-3">Add an Item</h2>
+
+                <form className="row g-4" onSubmit={handleSubmit}>
+                    <div className="col-md-9">
+                        <label for="inputTitle" className="form-label">Title</label>
+                        <input type="text" className="form-control" id="inputTitle" placeholder="Title" value={title} onChange={event => setTitle(event.target.value)}/>
+                    </div>
+                    <div className="col-md-3">
+                        <label for="inputPrice" className="form-label">Price</label>
+                        <input type="number" min="0" step="any" className="form-control" id="inputPrice" placeholder="Price" value={price} onChange={event => setPrice(event.target.value)}/>
+                    </div>
+                    <div className="col-12">
+                        <label for="inputDescription" className="form-label">Description</label>
+                        <input type="text" className="form-control" id="inputDescription" placeholder="Item Description" value={description} onChange={event => setDescription(event.target.value)}/>
+                    </div>
+                    <div className="col-md-3">
+                        <label for="inputCategory" className="form-label">Category</label>
+                        <input type="text" className="form-control" id="inputCategory" placeholder="Category" value={category} onChange={event => setCategory(event.target.value)}/>
+                    </div>
+                    <div className="col-md-7">
+                        <label for="inputImage" className="form-label">Image</label>
+                        <input type="text" className="form-control" id="inputImage" placeholder="Item Image" value={image} onChange={event => setImage(event.target.value)}/>
+                    </div>
+                    <div className="col-md-2">
+                        <label for="inputRating" className="form-label">Rating</label>
+                        <input type="number" min="0" step="any" className="form-control" id="inputRating" placeholder="Rating" value={rating} onChange={event => setRating(event.target.value)}/>
+                    </div>
+                    <div className="col-md-2">
+                        <button type="submit" className="btn btn-primary px-4 py-2">Add Item!</button>
+                        {/* <button className="btn btn-primary px-4 py-2 ms-3" onClick={() => setAddItems(false)}>Back to Inventory</button> */}
+                    </div>
+                    <div className="col-md-2 my-n5">
+                        <button className="btn btn-primary px-4 py-2" onClick={() => setAddItems(false)}>Back to Inventory</button>
+                    </div>
+                </form>
+            </div>
+
         </>
     ) 
 };

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { ItemList } from './ItemList';
+import { Item } from "./Item";
 import { SingleItem } from "./SingleItem";
 import { Form } from "./Form";
 import Navbar from './NavBar';
 import Home from './Home';
+import {Switch, Route} from "react-router-dom";
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
+import { compose } from 'redux';
 
 
 
@@ -31,20 +34,53 @@ export const App = () => {
 
 	// filter
 	const [filter, setFilter] = useState(items);
+	console.log(filter)
 
-	const categoryItems = [...new Set(items.map((val) => val.category))]
-	console.log(categoryItems)
+	// const categoryItems = [...new Set(items.map((val) => val.category))]
+	// console.log(categoryItems)
 
+	let componentMounted = true;
+
+	// async function fetchItems(){
+	// 	try {
+	// 		const response = await fetch(`${apiURL}/items`);
+	// 		const itemsData = await response.json();
+			
+	// 		setItems(itemsData);
+	// 	} catch (err) {
+	// 		console.log("Oh no an error! ", err)
+	// 	}
+	// }
+
+	// async function fetchItems(){
+	// 	try {
+	// 		// setLoading(true)
+	// 		const response = await fetch(`${apiURL}/items`);
+	// 		// const itemsData = await response.clone().json();
+	// 		// if (componentMounted) {
+	// 		setItems(await response.clone().json());
+	// 		setFilter(await response.json());
+	// 		// setLoading(false)
+	// 		console.log(filter)
+	// 		// }
+
+	// 	} catch (err) {
+	// 		console.log("Oh no an error! ", err)
+	// 	}
+	// }
+	
 	async function fetchItems(){
 		try {
 			const response = await fetch(`${apiURL}/items`);
-			const itemsData = await response.json();
+			const itemsData = await response.clone().json();
 			
 			setItems(itemsData);
+			setFilter(await response.json())
 		} catch (err) {
 			console.log("Oh no an error! ", err)
 		}
 	}
+
 
 	useEffect(() => {
 		fetchItems();
@@ -65,28 +101,22 @@ export const App = () => {
 	// 	)
 	// }
 
-	const filterProduct = (cat) => {
-		const updatedList = items.filter((x) => {
-			return x.category === cat;
-		});
-		setItems(updatedList);
-		// setItems(items)
-		// setFilter(updatedList);
-		// console.log(updatedList)
-		
-	}
+
+	// const filterProduct = (cat) => {
+	// 	console.log(filter)
+	// 	const updatedList = items.filter((x) => 
+	// 		x.category === cat
+	// 	);
+	// 	setItems(updatedList);
+	// 	setFilter(updatedList);
+	// 	// setItems(items)
+	// 	// setFilter(updatedList);
+	// 	// console.log(updatedList)
+	// 	console.log(filter)
+	// }
 				
 	const ShowProducts = () => {
-
-		// const filterProduct = (cat) => {
-		// 	const updatedList = items.filter((x) => {
-		// 		return x.category === cat;
-		// 	});
-		// 	setFilter(updatedList);
-		// 	// setItems(items)
-		// 	// setFilter(updatedList);
-		// 	console.log(updatedList)
-		// }
+	
 		return (
 			<>
 					<div className='buttons d-flex justify-content-center mb-5 pb-5'>
@@ -96,32 +126,12 @@ export const App = () => {
 						<button className='btn btn-outline-dark me-2' onClick={() => filterProduct("jewelery")}>Jewelery</button>
 						<button className='btn btn-outline-dark me-2' onClick={() => filterProduct("electronics")}>Electronics</button>
 					</div>
-
-
-					{/* <div className="buttons d-flex justify-content-center mb-5 pb-5">
-        			{categoryItems.map((Val, id) => {
-          				return (
-            		<button
-              			className="btn btn-outline-dark me-2"
-              			onClick={() => filterProduct(Val)}
-              			key={id}
-            		>
-              		{Val}
-            		</button>
-          		);
-     		})}
-        			<button
-          			className="btn btn-outline-dark me-2"
-          			onClick={() => setItems(items)}
-        			>
-          			All
-        			</button>
-				</div> */}
 			</>
 		)
 	}
 
 	return (
+		<>
 		<main>
 			{
 				singleItem ? (
@@ -130,16 +140,11 @@ export const App = () => {
 					< Form addItems={addItems} setAddItems={setAddItems} items={items} setItems={setItems}/>
 				) : <section>
 						<Navbar />
-						<Home />
-						<div className="store">
-							<br></br>
-							<button onClick={() => setAddItems(true)}>Add an Item</button>
-						</div>
-						<br></br>
+						<Home setAddItems={setAddItems} id="home"/>
 						<div className="container my-5 py-3">
         					<div className="row">
           						<div className="col-12 mb-0">
-            						<h1 className="display-6 fw-bolder text-center">
+            						<h1 className="display-6 fw-bolder text-center" id='products'>
               						Latest Products
             						</h1>
             						<hr />
@@ -149,14 +154,17 @@ export const App = () => {
 
 						<div className='row justify-content-center container-fluid'>
 							{/* {loading ? <Loading /> : <ShowProducts />} */}
-							{filter ? <ShowProducts /> : null}
+							<ShowProducts />
+							{/* {filter ? <ShowProducts /> : null} */}
 						</div>
 
-						<div className="item-list">
+						<div className="container d-flex flex-wrap">
 							<ItemList items={items} fetchItemData={fetchItemData}/>
 						</div>
 					</section>
 			}	
 		</main>
+		<footer>Made with ❤️ &copy; Inventory App</footer>
+		</>
 	)
 }
