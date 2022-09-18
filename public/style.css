@@ -1,22 +1,27 @@
 * {
   margin: 0;
   box-sizing: border-box;
-  background-color: rgb(158, 163, 204);
+  /* background-color: rgb(255, 255, 255); */
 }
 
-img {
+/* Navbar */
+.navbar-nav a {
+  font-size: 1.3rem;
+}
+
+/* img { */
   /* max-width: calc(100% - 5rem);
   display: block; */
   /* margin-bottom: .5rem; */
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   /* float: left; */
-  width:  auto;
-  height: 15rem;
-  object-fit: cover;
+  /* width:  auto;
+  height: 15rem; */
+  /* object-fit: cover; */
   /* justify-content: center;
   align-items: center; */
-}
+/* } */
 
 .item-list {
   display: flex;
@@ -26,17 +31,17 @@ img {
 }
 
 .item-list .indiv-item {
-  flex: 1 0 33%;
+  /* flex: 1 0 33%; */
   border: 1px solid rgb(211, 210, 210);
   background-color: rgb(255, 255, 255);
-  justify-content: center;
+  /* justify-content: center; */
   border-radius: .3rem;
   /* min-height: 33.33vh; */
   /* margin: 0.5rem; */
-  margin: 0.14rem;
-
+  /* margin: 0.14rem; */
+  /* align-items: center; */
   /* centers the text and images */
-  text-align: center;
+  /* text-align: center; */
 }
 
 .item-list .indiv-item h3{
@@ -47,6 +52,7 @@ img {
   background-color: rgb(255, 255, 255);
 }
 
+/* Add an Item button under home */
 .store {
   text-align: center;
 }
