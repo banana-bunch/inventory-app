@@ -1,7 +1,7 @@
-const {sauces, items} = require('./seedData.js');
+const {items} = require('./seedData.js');
 
 const {sequelize} = require('./db');
-const {Sauce} = require('./models');
+const {Item} = require('./models');
 
 const seed = async () => {
 
