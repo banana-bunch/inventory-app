@@ -5,11 +5,14 @@ import { SingleItem } from "./SingleItem";
 import { Form } from "./Form";
 import Navbar from './NavBar';
 import Home from './Home';
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, Routes} from "react-router-dom";
+import Cart from './Cart';
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
 import { compose } from 'redux';
+import About from './About';
+
 
 
 
@@ -38,6 +41,12 @@ export const App = () => {
 
 	// const categoryItems = [...new Set(items.map((val) => val.category))]
 	// console.log(categoryItems)
+
+		// render cart component
+		const [isCart, setIsCart] = useState(false)
+
+		// About page
+		const [about, setAbout] = useState(false);
 
 	let componentMounted = true;
 
@@ -138,8 +147,21 @@ export const App = () => {
 					<SingleItem singleItem={singleItem} setSingleItem={setSingleItem} items={items} setItems={setItems} updateItem={updateItem} setUpdateItem={setUpdateItem}/>
 				) :  addItems ? (
 					< Form addItems={addItems} setAddItems={setAddItems} items={items} setItems={setItems}/>
-				) : <section>
+				) : isCart ? (
+					<div>
 						<Navbar />
+						<Routes>
+							<Route path="/cart" element={<Cart />}/>
+						</Routes>
+					</div>
+					
+				) : about ? (
+					<Routes>
+						<Route path="/about" element={<About />}/>
+					</Routes>
+				) :
+					 <section>
+						<Navbar setIsCart={setIsCart} isCart={isCart} about={about} setAbout={setAbout}/>
 						<Home setAddItems={setAddItems} id="home"/>
 						<div className="container my-5 py-3">
         					<div className="row">
@@ -168,3 +190,6 @@ export const App = () => {
 		</>
 	)
 }
+
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(<App />);

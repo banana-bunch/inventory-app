@@ -61,27 +61,27 @@ export function Update ({singleItem, setSingleItem, updateItem, setUpdateItem}) 
 
                 <form className="row g-4" onSubmit={handleUpdate}>
                     <div className="col-md-9">
-                        <label for="inputTitle" className="form-label">Title</label>
+                        <label htmlFor="inputTitle" className="form-label">Title</label>
                         <input type="text" className="form-control" id="inputTitle" placeholder="Title" value={title} onChange={event => setTitle(event.target.value)}/>
                     </div>
                     <div className="col-md-3">
-                        <label for="inputPrice" className="form-label">Price</label>
+                        <label htmlFor="inputPrice" className="form-label">Price</label>
                         <input type="number" min="0" step="any" className="form-control" id="inputPrice" placeholder="Price" value={price} onChange={event => setPrice(event.target.value)}/>
                     </div>
                     <div className="col-12">
-                        <label for="inputDescription" className="form-label">Description</label>
+                        <label htmlFor="inputDescription" className="form-label">Description</label>
                         <input type="text" className="form-control" id="inputDescription" placeholder="Item Description" value={description} onChange={event => setDescription(event.target.value)}/>
                     </div>
                     <div className="col-md-3">
-                        <label for="inputCategory" className="form-label">Category</label>
+                        <label htmlFor="inputCategory" className="form-label">Category</label>
                         <input type="text" className="form-control" id="inputCategory" placeholder="Category" value={category} onChange={event => setCategory(event.target.value)}/>
                     </div>
                     <div className="col-md-7">
-                        <label for="inputImage" className="form-label">Image</label>
+                        <label htmlFor="inputImage" className="form-label">Image</label>
                         <input type="text" className="form-control" id="inputImage" placeholder="Item Image" value={image} onChange={event => setImage(event.target.value)}/>
                     </div>
                     <div className="col-md-2">
-                        <label for="inputRating" className="form-label">Rating</label>
+                        <label htmlFor="inputRating" className="form-label">Rating</label>
                         <input type="number" min="0" step="any" className="form-control" id="inputRating" placeholder="Rating" value={rating} onChange={event => setRating(event.target.value)}/>
                     </div>
                     <div className="my-3">

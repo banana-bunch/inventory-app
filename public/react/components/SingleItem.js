@@ -1,11 +1,26 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addCart, delCart } from "../redux/action";
 import apiURL from '../api';
 import Navbar from "./NavBar";
 
 import { Update } from "./Update";
 
 export function SingleItem ({singleItem, setSingleItem, items, setItems, updateItem, setUpdateItem}) {
+
+    const [cartBtn, setCartBtn] = useState("Add to Cart")
+
+    const dispatch = useDispatch();
+
+    const addProduct = (singleItem) => {
+        if (cartBtn === "Add to Cart") {
+        dispatch(addCart(singleItem))
+        setCartBtn("Remove from Cart")
+        } else {
+            dispatch(delCart(singleItem))
+            setCartBtn("Add to Cart")
+        }
+    }
 
     const handleClick = async () => {
         const response = await fetch(`${apiURL}/items/${singleItem.id}`, {
@@ -43,7 +58,7 @@ export function SingleItem ({singleItem, setSingleItem, items, setItems, updateI
                                     <p className="lead "><strong className="fw-bolder">Rating</strong> {singleItem.rating}/5 <i className="fa fa-star"></i></p>
                                     <h3 className="display-6 fw-bold my-4">$ {singleItem.price}</h3>
                                     <p className="lead">{singleItem.description}</p>
-                                    <button className="btn btn-outline-dark px-4 py-2">Add to Cart</button>
+                                    <button className="btn btn-outline-dark px-4 py-2" onClick={() => addProduct(singleItem)}>{cartBtn}</button>
                                     <button className="btn btn-outline-dark ms-2 px-3 py-2">Go to Cart</button>
                                     <div className="my-3">
                                         <button className="btn btn-dark px-4 py-2" onClick={() => setUpdateItem(true)}>Update Item</button>
