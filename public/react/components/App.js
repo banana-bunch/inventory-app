@@ -7,12 +7,14 @@ import Navbar from './NavBar';
 import Home from './Home';
 import {Switch, Route, Routes} from "react-router-dom";
 import Cart from './Cart';
+import { NavLink } from 'react-router-dom';
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
 import { compose } from 'redux';
 import About from './About';
 import ShowProducts from './ShowProducts';
+// import Skeleton from "react-loading-skeleton";
 
 
 
@@ -37,7 +39,7 @@ export const App = () => {
 	// const [loading, setLoading] = useState(false);
 
 	// filter
-	// const [filter, setFilter] = useState(items);
+	const [filter, setFilter] = useState(items);
 	// console.log(filter)
 	// const [filterComp, setFilterComp] = useState(false);
 
@@ -46,24 +48,75 @@ export const App = () => {
 
 		// About page
 		const [about, setAbout] = useState(false);
-	
-	async function fetchItems(){
-		try {
+
+
+
+		let componentMounted = true;
+
+		useEffect(() => {
+		  const getProducts = async () => {
+			// setLoading(true);
 			const response = await fetch(`${apiURL}/items`);
-			const itemsData = await response.json();
+			if (componentMounted) {
+			  setItems(await response.clone().json());
+			  setFilter(await response.json());
+			//   setLoading(false);
+			  console.log(filter);
+			}
+	  
+			return () => {
+			  componentMounted = false;
+			};
+		  };
+	  
+		  getProducts();
+		}, []);
+	  
+		// const Loading = () => {
+		// 	return (
+		// 	<>
+		// 		<div className="col-md-3">
+		// 			<Skeleton height={400}/>
+		// 		</div>
+		// 		<div className="col-md-3">
+		// 			<Skeleton height={400}/>
+		// 		</div>
+		// 		<div className="col-md-3">
+		// 			<Skeleton height={400}/>
+		// 		</div>
+		// 		<div className="col-md-3">
+		// 			<Skeleton height={400}/>
+		// 		</div>
+		// 	</>
+		// 	);
+		//   };
+
+
+
+
+
+
+
+
+
+	
+	// async function fetchItems(){
+	// 	try {
+	// 		const response = await fetch(`${apiURL}/items`);
+	// 		const itemsData = await response.json();
 			
-			setItems(itemsData);
-			// setFilter(await response.json())
-		} catch (err) {
-			console.log("Oh no an error! ", err)
-		}
-	}
+	// 		setItems(itemsData);
+	// 		// setFilter(await response.json())
+	// 	} catch (err) {
+	// 		console.log("Oh no an error! ", err)
+	// 	}
+	// }
 
 
-	useEffect(() => {
-		fetchItems();
-		// setLoading(true);
-	}, []);
+	// useEffect(() => {
+	// 	fetchItems();
+	// 	// setLoading(true);
+	// }, []);
 
 	const fetchItemData = async (item) => {
 		const res = await fetch (`${apiURL}/items/${item.id}`);
@@ -71,45 +124,52 @@ export const App = () => {
 		setSingleItem(itemData);
 	}
 
-	// const Loading = () => {
-	// 	return (
-	// 		<>
-	// 			Loading....
-	// 		</>
-	// 	)
-	// }
 
 
-	// const filterProduct = (cat) => {
-	// 	console.log(filter)
-	// 	const updatedList = items.filter((x) => 
-	// 		x.category === cat
-	// 	);
-	// 	// setItems(updatedList);
-	// 	setFilter(updatedList);
-	// 	// console.log(updatedList)
-	// 	console.log(filter)
-	// }
-	
-	// ? Attempting to filter products via category - comment out for now as well as ShowProducts component
-	// const Category = () => {
-	
-	// 	return (
-	// 		<>
-	// 				{/* <div className='buttons d-flex justify-content-center mb-5 pb-5'>
-	// 					<button className='btn btn-outline-dark me-2' onClick={() => setItems(items)}>All</button>
-	// 					<button className='btn btn-outline-dark me-2' onClick={() => filterProduct("men's clothing")}>Men's Clothing</button>
-	// 					<button className='btn btn-outline-dark me-2' onClick={() => filterProduct("women's clothing")}>Women's Clothing</button>
-	// 					<button className='btn btn-outline-dark me-2' onClick={() => filterProduct("jewelery")}>Jewelery</button>
-	// 					<button className='btn btn-outline-dark me-2' onClick={() => filterProduct("electronics")}>Electronics</button>
-	// 				</div> */}
-	// 				{/* <div className='buttons d-flex justify-content-center mb-5 pb-5'>
+	const filterProduct = (cat) => {
+		const updatedList = items.filter((x)=>x.category === cat);
+		setFilter(updatedList);
+	}
+  
+	const ShowProducts = () => {
+	  return (
+		<>
+		<div className='container'>
+			<div className="buttons d-flex justify-content-center mb-5 pb-5">
+				<button className="btn btn-outline-dark me-2" onClick={()=>setFilter(items)}>All</button>
+				<button className="btn btn-outline-dark me-2" onClick={()=>filterProduct("men's clothing")}>Men's Clothing</button>
+				<button className="btn btn-outline-dark me-2" onClick={()=>filterProduct("women's clothing")}>
+				Women's Clothing
+				</button>
+				<button className="btn btn-outline-dark me-2" onClick={()=>filterProduct("jewelery")}>Jewelery</button>
+				<button className="btn btn-outline-dark me-2" onClick={()=>filterProduct("electronics")}>Electronics</button>
+			</div>
+		</div>
+		  {filter.map((item, idx) => {
+			return (
+			  <>
+				
+				<div className="col-md-4 mb-4" key={idx}>
+						<div className="indiv-card card h-100 text-center m-3 p-4" >
+						<img onClick={() => fetchItemData(item)} src={item.image} className="card-img-top" alt={item.title} style={{ height: "325px" }} />
+						<div className="card-body">
+							<h5 className="card-title mb-0">{item.title.substring(0,12)} ...</h5>
+							<p className="card-text lead fw-bold">$ {item.price}</p>
+							<a href="#" className="btn btn-outline-dark" onClick={() => fetchItemData(item)}>Buy Now</a>
+						</div>
+						</div>
+					</div>
 
-	// 					<button className='btn btn-outline-dark me-2 fw-bold fs-2' onClick={() => setFilterComp(true)}>Categories</button>
-	// 				</div> */}
-	// 		</>
-	// 	)
-	// }
+			  </>
+			);
+		  })}
+		</>
+	  );
+	};
+
+	// 	useEffect(() => {
+	// 	ShowProducts();
+	// }, []);
 
 	return (
 		<>
@@ -132,24 +192,6 @@ export const App = () => {
 						<Route path="/about" element={<About />}/>
 					</Routes>
 				) : 
-				// filterComp ? (
-				// 	<div>
-				// 		{/* <Navbar />
-				// 		<Home /> */}
-				// 		<Navbar  setIsCart={setIsCart} isCart={isCart} singleItem={singleItem} setSingleItem={setSingleItem} items={items} setItems={setItems} updateItem={updateItem} setUpdateItem={setUpdateItem}/>
-				// 		<div className="container my-5 py-3">
-        		// 			<div className="row">
-          		// 				<div className="col-12 mb-0">
-            	// 					<h1 className="display-6 fw-bolder text-center" id='products'>
-              	// 					Latest Products
-            	// 					</h1>
-            	// 					<hr />
-          		// 				</div>
-        		// 			</div>
-      			// 		</div>
-				// 		<ShowProducts filter={filter} setFilter={setFilter} items={items} setItems={setItems} fetchItemData={fetchItemData}/>
-				// 	</div>
-				// ) :
 					 <section>
 						<Navbar setIsCart={setIsCart} isCart={isCart} about={about} setAbout={setAbout}/>
 						<Home setAddItems={setAddItems} id="home"/>
@@ -169,8 +211,12 @@ export const App = () => {
 							{/* <Category /> */}
 						</div>
 
-						<div className="container d-flex flex-wrap">
+						{/* <div className="container d-flex flex-wrap">
 							<ItemList items={items} fetchItemData={fetchItemData}/>
+						</div> */}
+						<div className="container d-flex flex-wrap">
+						{/* {loading ? <Loading /> : <ShowProducts items={items} fetchItemData={fetchItemData}/>} */}
+						<ShowProducts items={items} fetchItemData={fetchItemData}/>
 						</div>
 					</section>
 			}	

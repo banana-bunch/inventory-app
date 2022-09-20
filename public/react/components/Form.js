@@ -58,6 +58,9 @@ export function Form ({addItems, setAddItems, items, setItems}) {
             console.log("form error", err)
         }  
 
+        setAddItems(false)
+
+
 	  }
 
     return (
