@@ -121,7 +121,7 @@ export const App = () => {
 					< Form addItems={addItems} setAddItems={setAddItems} items={items} setItems={setItems}/>
 				) : isCart ? (
 					<div>
-						<Navbar  setIsCart={setIsCart} isCart={isCart} singleItem={singleItem} setSingleItem={setSingleItem} items={items} setItems={setItems} updateItem={updateItem} setUpdateItem={setUpdateItem}/>
+						<Navbar  setIsCart={setIsCart} isCart={isCart} singleItem={singleItem} setSingleItem={setSingleItem} items={items} setItems={setItems} updateItem={updateItem} setUpdateItem={setUpdateItem} about={about} setAbout={setAbout}/>
 						<Routes>
 							<Route path="/cart" element={<Cart />}/>
 						</Routes>

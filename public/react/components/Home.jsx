@@ -10,7 +10,7 @@ const Home = ({setAddItems}) => {
             <div className="container">
                 <h5 className="card-title display-3 fw-bolder mb-3">Inventory Galore</h5>
                 <p className="card-text lead fs-4">
-                Whatever item you need, Banana Bunches got it
+                Whatever item you need, Banana Bunch has it
                 </p>
                 <p className="card-text lead fs-4">
                 The prices are totally 🍌s !

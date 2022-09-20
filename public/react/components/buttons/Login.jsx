@@ -12,7 +12,7 @@ const Login = () => {
 
     return (
         <>
-      <Button variant="outline-primary ms-auto"  onClick={handleShow}>
+      <Button variant="outline-primary"  onClick={handleShow}>
       <span className="fa fa-sign-in me-1"></span> Login
       </Button>
 

@@ -6,7 +6,7 @@ import Login from "./buttons/Login";
 import Signup from "./buttons/signup";
 import CartBtn from "./buttons/CartBtn";
 
-const Navbar = ({setSingleItem, singleItem, setUpdateItem, updateItem, setAddItems, addItems, setIsCart, isCart, setAbout}) => {
+const Navbar = ({setSingleItem, singleItem, setUpdateItem, updateItem, setAddItems, addItems, setIsCart, isCart, setAbout, about}) => {
 
     // const [isCart, setIsCart] = useState(false)
 
@@ -23,8 +23,9 @@ const Navbar = ({setSingleItem, singleItem, setUpdateItem, updateItem, setAddIte
             setAddItems(false)
         } else if (isCart) {
             setIsCart(false)
+        } else if (about) {
+            setAbout(false)
         }
-
     }
 
     const handleAbout = () => {
@@ -46,7 +47,7 @@ const Navbar = ({setSingleItem, singleItem, setUpdateItem, updateItem, setAddIte
     <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
       <div className="container">
         <a className="navbar-brand fw-bold fs-4" href="https://www.youtube.com/watch?v=dUZGTfEQqqI" target={"_blank"}>
-          Banana Bunches 🍌
+          Inventory App 📦
         </a>
         <button
           className="navbar-toggler"
