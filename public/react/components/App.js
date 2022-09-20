@@ -10,7 +10,7 @@ export const App = () => {
 
 	const [items, setItems] = useState([]);
 
-	// if updateItem is true within the singleView component, Update component will render
+	// if updateItem is true within the SingleView component, Update component will render
 	const [updateItem, setUpdateItem] = useState(false);
 
 	// single item
