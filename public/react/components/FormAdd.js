@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { items } from "../../../server/seedData";
 import apiURL from "../api";
 
-export const FormAdd = ({setItems}) => {
+export const FormAdd = ({setItems, addItem, setAddItem}) => {
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState('');
@@ -33,7 +33,7 @@ export const FormAdd = ({setItems}) => {
     return (
       <>
         <h2>Add an Item</h2>
-        <form>
+        <form onSubmit={handler}>
           <p>
             <input type="text" value={title} placeholder="Title" onChange={(event) => setTitle(event.target.value)}/>
           </p>
@@ -50,7 +50,7 @@ export const FormAdd = ({setItems}) => {
             <input type="text" value={image} placeholder="Item Image url" onChange={(event) => setImage(event.target.value)}/>
           </p>
           <p>
-            <button onClick={handler}>Add Item</button>
+            <button onClick={() => setAddItem(true)}>Add Item</button>
           </p>
         </form>
       </>

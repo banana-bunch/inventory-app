@@ -6,7 +6,7 @@ export const SingleView = ({item, setItem, updateItem, setUpdateItem}) => {
     // add conditional rendering - if updateItem is true, render Update Component ; update Item is true when I press a button
     return <>
 {        updateItem ? (
-        <Update updateItem={updateItem} setUpdateItem={setUpdateItem}/>
+        <Update updateItem={updateItem} setUpdateItem={setUpdateItem} item={item}/>
         ): 
         <div>
             <h3>{item.title}</h3>
