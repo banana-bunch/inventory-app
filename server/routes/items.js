@@ -12,6 +12,10 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// GET one item
+
+// DELTE an item
+
 // PUT /items/:id - on single view, when update button is clicked, Update component is rendered and when update button is clicked, item is updated via its unique id
 router.put("/:id", async (req, res) => {
   try {

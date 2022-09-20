@@ -7,6 +7,12 @@ import apiURL from '../api';
 export const App = () => {
 
 	const [items, setItems] = useState([]);
+	
+		// if singleItem is true, singleView component will render 
+		const [singleItem, setSingleItem] = useState(null);
+
+		// if updateItem is true within the singleView component, Update component will render
+		const [updateItem, setUpdateItem] = useState(false);
 
 	async function fetchItems(){
 		try {
@@ -23,12 +29,28 @@ export const App = () => {
 		fetchItems();
 	}, []);
 
+	const fetchItemData = async (item) => {
+		const res = await fetch (`${apiURL}/items/${item.id}`);
+		const itemData = await res.json();
+		setSingleItem(itemData);
+	}
+
 	return (
-		<main>	
-      <h1>Item Store</h1>
-			<h2>All things 🔥</h2>
-			<br></br>
-			<ItemList items={items} />
+		<>
+		<main>
+			{
+				singleItem ? (
+					<singleView singleItem={singleItem} setSingleItem={setSingleItem} items={items} setItems={setItems} updateItem={updateItem} setUpdateItem={setUpdateItem}/>
+				) :  addItems ? (
+					< Form addItems={addItems} setAddItems={setAddItems} items={items} setItems={setItems}/>
+				) :
+					 <section>
+						<div >
+							<ItemList items={items} fetchItemData={fetchItemData}/>
+						</div>
+					</section>
+			}	
 		</main>
+		</>
 	)
 }

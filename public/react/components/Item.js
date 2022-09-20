@@ -5,7 +5,7 @@ export const Item = ({ item, fetchItemData }) => {
   // console.log(item)
 
   return <>
-    <h3>{item.title}</h3>
+    <h3 onClick={() => fetchItemData(item)}>{item.title}</h3>
     <p>{item.price}</p>
     <p>{item.description}</p>
     <p>{item.category}</p>

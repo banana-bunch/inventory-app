@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 
 import apiURL from '../api';
-import Navbar from "./NavBar";
 
 export function Update ({singleItem, setSingleItem, updateItem, setUpdateItem}) {
 
@@ -42,7 +41,6 @@ export function Update ({singleItem, setSingleItem, updateItem, setUpdateItem}) 
             setDescription("");
             setCategory("");
             setImage("");
-            setRating("");
 
             setUpdateItem(false);
             setSingleItem(false);
@@ -54,39 +52,34 @@ export function Update ({singleItem, setSingleItem, updateItem, setUpdateItem}) 
 
     return (
         <>
-            <Navbar setUpdateItem={setUpdateItem} setSingleItem={setSingleItem} updateItem={updateItem}/>
-            <div className="container d-flex flex-column justify-content-center align-items-center my-5">
+            <div>
                 {/* <h1>BB R Us</h1> */}
-                <h2 className="my-3">Update an Item</h2>
+                <h2 >Update an Item</h2>
 
-                <form className="row g-4" onSubmit={handleUpdate}>
-                    <div className="col-md-9">
+                <form  onSubmit={handleUpdate}>
+                    <div >
                         <label htmlFor="inputTitle" className="form-label">Title</label>
                         <input type="text" className="form-control" id="inputTitle" placeholder="Title" value={title} onChange={event => setTitle(event.target.value)} required/>
                     </div>
-                    <div className="col-md-3">
+                    <div >
                         <label htmlFor="inputPrice" className="form-label">Price</label>
                         <input type="number" min="0" step="any" className="form-control" id="inputPrice" placeholder="Price" value={price} onChange={event => setPrice(event.target.value)} required/>
                     </div>
-                    <div className="col-12">
+                    <div >
                         <label htmlFor="inputDescription" className="form-label">Description</label>
                         <textarea type="text" className="form-control" id="inputDescription" placeholder="Item Description" value={description} onChange={event => setDescription(event.target.value)} required/>
                     </div>
-                    <div className="col-md-3">
+                    <div >
                         <label htmlFor="inputCategory" className="form-label">Category</label>
                         <input type="text" className="form-control" id="inputCategory" placeholder="Category" value={category} onChange={event => setCategory(event.target.value)} required/>
                     </div>
-                    <div className="col-md-7">
+                    <div >
                         <label htmlFor="inputImage" className="form-label">Image</label>
                         <input type="text" className="form-control" id="inputImage" placeholder="Item Image" value={image} onChange={event => setImage(event.target.value)} required/>
                     </div>
-                    <div className="col-md-2">
-                        <label htmlFor="inputRating" className="form-label">Rating</label>
-                        <input type="number" min="0" step="any" className="form-control" id="inputRating" placeholder="Rating" value={rating} onChange={event => setRating(event.target.value)} required/>
-                    </div>
-                    <div className="my-3">
-                        <button type="submit" className="btn btn-primary px-4 py-2">Update Item!</button>
-                        <button className="btn btn-primary px-4 py-2 ms-3" onClick={() => setUpdateItem(false)}>Back to Item</button>
+                    <div >
+                        <button type="submit">Update Item!</button>
+                        <button  onClick={() => setUpdateItem(false)}>Back to Item</button>
                     </div>
                 </form>
             </div>
