@@ -3,7 +3,7 @@ import apiURL from "../api";
 
 export const Form = ({setItems}) => {
     const [title, setTitle] = useState('');
-    const [price, setPrice] = useState(number);
+    const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
     const [image, setImage] = useState('');
