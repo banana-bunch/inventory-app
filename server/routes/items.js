@@ -13,8 +13,15 @@ router.get("/", async (req, res, next) => {
 });
 
 // GET one item
-
-// DELTE an item
+router.get("/:id", async (req,res) => {
+  try {
+    const itemId = await Item.findByPk(req.params.id)
+    res.send(itemId)
+  } catch (error) {
+    console.log("error", error)
+  }
+});
+// DELETE an item
 
 // PUT /items/:id - on single view, when update button is clicked, Update component is rendered and when update button is clicked, item is updated via its unique id
 router.put("/:id", async (req, res) => {

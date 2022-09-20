@@ -2,24 +2,22 @@ import React, {useState} from "react";
 
 import apiURL from '../api';
 
-export function Update ({singleItem, setSingleItem, updateItem, setUpdateItem}) {
+export function Update ({item, setItem, updateItem, setUpdateItem}) {
 
-    const [title, setTitle] = useState(singleItem.title);
-    const [price, setPrice] = useState(singleItem.price);
+    const [title, setTitle] = useState(item.title);
+    const [price, setPrice] = useState(item.price);
 
-    const [description, setDescription] = useState(singleItem.description);
-    const [category, setCategory] = useState(singleItem.category);
+    const [description, setDescription] = useState(item.description);
+    const [category, setCategory] = useState(item.category);
 
-    const [image, setImage] = useState(singleItem.image);
-
-    const [rating, setRating] = useState(singleItem.rating);
+    const [image, setImage] = useState(item.image);
 
 
     const handleUpdate = async (event) => {
         window.location.reload(false)
         try{
         event.preventDefault();
-            const response = await fetch(`${apiURL}/items/${singleItem.id}`, {
+            const response = await fetch(`${apiURL}/items/${item.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -30,8 +28,7 @@ export function Update ({singleItem, setSingleItem, updateItem, setUpdateItem}) 
                 price: price,
                 description: description,
                 category: category,
-                image: image,
-                rating: rating
+                image: image
             })
         })
             const data = await response.json();
@@ -43,7 +40,7 @@ export function Update ({singleItem, setSingleItem, updateItem, setUpdateItem}) 
             setImage("");
 
             setUpdateItem(false);
-            setSingleItem(false);
+            setItem(false);
 
         } catch (err) {
             console.log("update error", err)
@@ -53,7 +50,6 @@ export function Update ({singleItem, setSingleItem, updateItem, setUpdateItem}) 
     return (
         <>
             <div>
-                {/* <h1>BB R Us</h1> */}
                 <h2 >Update an Item</h2>
 
                 <form  onSubmit={handleUpdate}>

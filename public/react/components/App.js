@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ItemList } from './ItemList';
+// import { Item } from './Item';
+import { SingleView } from './SingleView';
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
@@ -7,12 +9,23 @@ import apiURL from '../api';
 export const App = () => {
 
 	const [items, setItems] = useState([]);
-	
-		// if singleItem is true, singleView component will render 
-		const [singleItem, setSingleItem] = useState(null);
 
-		// if updateItem is true within the singleView component, Update component will render
-		const [updateItem, setUpdateItem] = useState(false);
+	// if updateItem is true within the singleView component, Update component will render
+	const [updateItem, setUpdateItem] = useState(false);
+
+	// single item
+	const [item, setItem] = useState(null);
+
+	//Fetch one item 
+	const fetchItem = async (item) =>{
+		try {
+			const response = await fetch(`${apiURL}/items/${item.id}`);
+			const data = await response.json();
+			setItem(data);
+		} catch (err) {
+			console.log("Oh no an error! ", err)
+		}
+  	}
 
 	async function fetchItems(){
 		try {
@@ -29,28 +42,27 @@ export const App = () => {
 		fetchItems();
 	}, []);
 
-	const fetchItemData = async (item) => {
-		const res = await fetch (`${apiURL}/items/${item.id}`);
-		const itemData = await res.json();
-		setSingleItem(itemData);
-	}
-
 	return (
 		<>
-		<main>
 			{
-				singleItem ? (
-					<singleView singleItem={singleItem} setSingleItem={setSingleItem} items={items} setItems={setItems} updateItem={updateItem} setUpdateItem={setUpdateItem}/>
+			<main>	
+				{item ? (
+					<div>
+					<SingleView item={item} setItem={setItem} updateItem={updateItem} setUpdateItem={setUpdateItem}/>
+					</div>
+					// Kadie's add item form code
 				) :  addItems ? (
 					< Form addItems={addItems} setAddItems={setAddItems} items={items} setItems={setItems}/>
 				) :
-					 <section>
-						<div >
-							<ItemList items={items} fetchItemData={fetchItemData}/>
-						</div>
+					<section>
+						<h1>Item Store</h1>
+						<h2>All things 🔥</h2>
+						<br></br>
+						<ItemList items={items} fetchItem={fetchItem}/>
 					</section>
-			}	
-		</main>
+				}
+			</main>
+			}
 		</>
 	)
 }
