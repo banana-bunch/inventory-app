@@ -39,4 +39,14 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// Post router
+router.post("/", async (req,res)=>{
+  try {
+    const item = await Item.create(req.body);
+    res.send(item)
+  } catch (err) {
+    console.log('add error', err)
+  }
+});
+
 module.exports = router;

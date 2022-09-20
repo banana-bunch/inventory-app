@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ItemList } from './ItemList';
-// import { Item } from './Item';
+import { FormAdd } from './FormAdd';
+import { Item } from './Item';
 import { SingleView } from './SingleView';
 
 // import and prepend the api url to any fetch calls
@@ -15,6 +16,9 @@ export const App = () => {
 
 	// single item
 	const [item, setItem] = useState(null);
+
+	// to add item
+	const [addItem, setAddItem] = useState(false);
 
 	//Fetch one item 
 	const fetchItem = async (item) =>{
@@ -51,14 +55,16 @@ export const App = () => {
 					<SingleView item={item} setItem={setItem} updateItem={updateItem} setUpdateItem={setUpdateItem}/>
 					</div>
 					// Kadie's add item form code
-				) :  addItems ? (
-					< Form addItems={addItems} setAddItems={setAddItems} items={items} setItems={setItems}/>
+				) :  addItem ? (
+					< FormAdd addItem={addItem} setAddItem={setAddItem} items={items} setItems={setItems}/>
 				) :
 					<section>
 						<h1>Item Store</h1>
 						<h2>All things 🔥</h2>
+						<button onClick={()=>setAddItem(true)} >Add Item</button>
 						<br></br>
 						<ItemList items={items} fetchItem={fetchItem}/>
+						
 					</section>
 				}
 			</main>

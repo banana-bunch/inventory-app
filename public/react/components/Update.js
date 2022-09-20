@@ -14,7 +14,7 @@ export function Update ({item, setItem, updateItem, setUpdateItem}) {
 
 
     const handleUpdate = async (event) => {
-        window.location.reload(false)
+        // window.location.reload(false)
         try{
         event.preventDefault();
             const response = await fetch(`${apiURL}/items/${item.id}`, {
