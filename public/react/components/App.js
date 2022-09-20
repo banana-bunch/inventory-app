@@ -34,12 +34,12 @@ export const App = () => {
 	const [updateItem, setUpdateItem] = useState(false);
 
 	// if loading is true, then load product category buttons
-	const [loading, setLoading] = useState(false);
+	// const [loading, setLoading] = useState(false);
 
 	// filter
-	const [filter, setFilter] = useState(items);
+	// const [filter, setFilter] = useState(items);
 	// console.log(filter)
-	const [filterComp, setFilterComp] = useState(false);
+	// const [filterComp, setFilterComp] = useState(false);
 
 		// render cart component
 		const [isCart, setIsCart] = useState(false)
@@ -80,16 +80,16 @@ export const App = () => {
 	// }
 
 
-	const filterProduct = (cat) => {
-		console.log(filter)
-		const updatedList = items.filter((x) => 
-			x.category === cat
-		);
-		// setItems(updatedList);
-		setFilter(updatedList);
-		// console.log(updatedList)
-		console.log(filter)
-	}
+	// const filterProduct = (cat) => {
+	// 	console.log(filter)
+	// 	const updatedList = items.filter((x) => 
+	// 		x.category === cat
+	// 	);
+	// 	// setItems(updatedList);
+	// 	setFilter(updatedList);
+	// 	// console.log(updatedList)
+	// 	console.log(filter)
+	// }
 	
 	// ? Attempting to filter products via category - comment out for now as well as ShowProducts component
 	// const Category = () => {
@@ -131,24 +131,25 @@ export const App = () => {
 					<Routes>
 						<Route path="/about" element={<About />}/>
 					</Routes>
-				) : filterComp ? (
-					<div>
-						{/* <Navbar />
-						<Home /> */}
-						<Navbar  setIsCart={setIsCart} isCart={isCart} singleItem={singleItem} setSingleItem={setSingleItem} items={items} setItems={setItems} updateItem={updateItem} setUpdateItem={setUpdateItem}/>
-						<div className="container my-5 py-3">
-        					<div className="row">
-          						<div className="col-12 mb-0">
-            						<h1 className="display-6 fw-bolder text-center" id='products'>
-              						Latest Products
-            						</h1>
-            						<hr />
-          						</div>
-        					</div>
-      					</div>
-						<ShowProducts filter={filter} setFilter={setFilter} items={items} setItems={setItems} fetchItemData={fetchItemData}/>
-					</div>
-				) :
+				) : 
+				// filterComp ? (
+				// 	<div>
+				// 		{/* <Navbar />
+				// 		<Home /> */}
+				// 		<Navbar  setIsCart={setIsCart} isCart={isCart} singleItem={singleItem} setSingleItem={setSingleItem} items={items} setItems={setItems} updateItem={updateItem} setUpdateItem={setUpdateItem}/>
+				// 		<div className="container my-5 py-3">
+        		// 			<div className="row">
+          		// 				<div className="col-12 mb-0">
+            	// 					<h1 className="display-6 fw-bolder text-center" id='products'>
+              	// 					Latest Products
+            	// 					</h1>
+            	// 					<hr />
+          		// 				</div>
+        		// 			</div>
+      			// 		</div>
+				// 		<ShowProducts filter={filter} setFilter={setFilter} items={items} setItems={setItems} fetchItemData={fetchItemData}/>
+				// 	</div>
+				// ) :
 					 <section>
 						<Navbar setIsCart={setIsCart} isCart={isCart} about={about} setAbout={setAbout}/>
 						<Home setAddItems={setAddItems} id="home"/>
@@ -178,6 +179,3 @@ export const App = () => {
 		</>
 	)
 }
-
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(<App />);

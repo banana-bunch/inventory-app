@@ -64,4 +64,14 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// GET /items/search
+// router.get("/search", async (req, res) => {
+//   try {
+//     const item = await Item.findByCategory(req.query.search);
+//     res.send(item);
+//   } catch (error) {
+//     console.log("search error", error);
+//   }
+// });
+
 module.exports = router;
