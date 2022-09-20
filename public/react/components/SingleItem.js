@@ -3,10 +3,13 @@ import { useDispatch } from "react-redux";
 import { addCart, delCart } from "../redux/action";
 import apiURL from '../api';
 import Navbar from "./NavBar";
+import {Switch, Route, Routes} from "react-router-dom";
+import Cart from "./Cart"
+
 
 import { Update } from "./Update";
 
-export function SingleItem ({singleItem, setSingleItem, items, setItems, updateItem, setUpdateItem}) {
+export function SingleItem ({singleItem, setSingleItem, items, setItems, updateItem, setUpdateItem, isCart, setIsCart}) {
 
     const [cartBtn, setCartBtn] = useState("Add to Cart")
 
@@ -41,9 +44,16 @@ export function SingleItem ({singleItem, setSingleItem, items, setItems, updateI
             {
                 updateItem ? (
                     <Update singleItem={singleItem} setSingleItem={setSingleItem} updateItem={updateItem} setUpdateItem={setUpdateItem}/>
-                ) : 
+                ) : isCart ? (
+                    <div>
+                        <Navbar  setIsCart={setIsCart} isCart={isCart} singleItem={singleItem} setSingleItem={setSingleItem} items={items} setItems={setItems} updateItem={updateItem} setUpdateItem={setUpdateItem}/>
+                        <Routes>
+                            <Route path="/cart" element={<Cart />}/>
+                        </Routes>
+                    </div>
+                ) :
                     <>
-                        <Navbar setSingleItem={setSingleItem} singleItem={singleItem}/>
+                        <Navbar setIsCart={setIsCart} isCart={isCart} setSingleItem={setSingleItem} singleItem={singleItem}  items={items} setItems={setItems} updateItem={updateItem} setUpdateItem={setUpdateItem}/>
                         <br></br><br></br><br></br><br></br>
                         <div className="container py-5">
                             <div className="row py-4">

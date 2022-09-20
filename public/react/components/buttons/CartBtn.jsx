@@ -8,6 +8,7 @@ const CartBtn = ({setIsCart}) => {
 
     const handleClick = () => {
         setIsCart(true)
+
     } 
 
     return (

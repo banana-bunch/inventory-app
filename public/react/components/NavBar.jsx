@@ -21,6 +21,8 @@ const Navbar = ({setSingleItem, singleItem, setUpdateItem, updateItem, setAddIte
             setSingleItem(false)
         } else if (addItems) {
             setAddItems(false)
+        } else if (isCart) {
+            setIsCart(false)
         }
 
     }
