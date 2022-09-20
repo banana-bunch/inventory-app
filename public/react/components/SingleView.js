@@ -2,6 +2,18 @@ import React from 'react'
 
 export const SingleView = ({item,setItem}) => {
 
+    const deleteItem = async (id) => {
+        try {
+            const response = await fetch(`${apiURL}/items/${id}`, {
+                method: "DELETE"
+            });
+            const data = await response.json();
+            setItem({});
+        } catch (err) {
+            console.log("error")
+        }
+      } 
+      
     return <>
         <h3>{item.title}</h3>
         <p>{item.price}</p>
