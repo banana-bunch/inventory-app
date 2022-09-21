@@ -14,7 +14,7 @@ export function Update ({item, setItem, updateItem, setUpdateItem}) {
 
 
     const handleUpdate = async (event) => {
-        // window.location.reload(false)
+        window.location.reload(false);
         try{
         event.preventDefault();
             const response = await fetch(`${apiURL}/items/${item.id}`, {
@@ -34,13 +34,13 @@ export function Update ({item, setItem, updateItem, setUpdateItem}) {
             const data = await response.json();
 
             setTitle("");
-            setPrice("");
+            setPrice(0);
             setDescription("");
             setCategory("");
             setImage("");
 
             setUpdateItem(false);
-            setItem(false);
+            // setItem(null);
 
         } catch (err) {
             console.log("update error", err)
@@ -75,7 +75,7 @@ export function Update ({item, setItem, updateItem, setUpdateItem}) {
                     </div>
                     <div >
                         <button type="submit">Update Item!</button>
-                        <button  onClick={() => setUpdateItem(false)}>Back to Item</button>
+                        <button  onClick={() => setUpdateItem(false)}>Back to List</button>
                     </div>
                 </form>
             </div>
