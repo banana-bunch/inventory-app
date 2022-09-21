@@ -4,7 +4,7 @@ A full-stack application to track your inventory
 ## Getting Started
 
 1. `npm install`
-2. `npm install bootstrap font-awesome redux react-redux react-router-dom --force`
+2. `npm install bootstrap font-awesome redux react-redux react-router-dom react-bootstrap --force`
 3. `npm run seed`
 4. `npm run server-dev`
 5. In a seperate terminal, `npm run client-dev`
