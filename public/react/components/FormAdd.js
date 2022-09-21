@@ -28,6 +28,10 @@ export const FormAdd = ({setItems, addItem, setAddItem}) => {
       setDescription('');
       setCategory('');
       setImage('');
+
+      setAddItem(false);
+      // setItems(true);
+
     }
   
     return (
@@ -50,7 +54,8 @@ export const FormAdd = ({setItems, addItem, setAddItem}) => {
             <input type="text" value={image} placeholder="Item Image url" onChange={(event) => setImage(event.target.value)}/>
           </p>
           <p>
-            <button onClick={() => setAddItem(true)}>Add Item</button>
+            <button>Add Item</button>
+            <button onClick={() => setAddItem(false)}>Back to List</button>
           </p>
         </form>
       </>
