@@ -96,7 +96,6 @@ export function Form ({addItems, setAddItems, items, setItems}) {
                     </div>
                     <div className="col-md-2">
                         <button type="submit" className="btn btn-primary px-4 py-2">Add Item!</button>
-                        {/* <button className="btn btn-primary px-4 py-2 ms-3" onClick={() => setAddItems(false)}>Back to Inventory</button> */}
                     </div>
                     <div className="col-md-2 my-n5">
                         <button className="btn btn-primary px-4 py-2" onClick={() => setAddItems(false)}>Back to Inventory</button>

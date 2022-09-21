@@ -50,13 +50,13 @@ export function Update ({singleItem, setSingleItem, updateItem, setUpdateItem}) 
         } catch (err) {
             console.log("update error", err)
         }
+        
     }
 
     return (
         <>
             <Navbar setUpdateItem={setUpdateItem} setSingleItem={setSingleItem} updateItem={updateItem}/>
             <div className="container d-flex flex-column justify-content-center align-items-center my-5">
-                {/* <h1>BB R Us</h1> */}
                 <h2 className="my-3">Update an Item</h2>
 
                 <form className="row g-4" onSubmit={handleUpdate}>

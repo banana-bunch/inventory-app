@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import Cart from "./Cart";
 import Login from "./buttons/Login";
 import Signup from "./buttons/signup";
 import CartBtn from "./buttons/CartBtn";
 
 const Navbar = ({setSingleItem, singleItem, setUpdateItem, updateItem, setAddItems, addItems, setIsCart, isCart, setAbout, about}) => {
 
-    // const [isCart, setIsCart] = useState(false)
 
     const state = useSelector((state) => state.handleCart)
 
@@ -30,14 +28,6 @@ const Navbar = ({setSingleItem, singleItem, setUpdateItem, updateItem, setAddIte
 
     const handleAbout = () => {
         setAbout(true)
-        // if (singleItem) {
-        // setAbout(true)
-        // } else if (updateItem) {
-        //     setUpdateItem(false)
-        //     setSingleItem(false)
-        // } else if (addItems) {
-        //     setAddItems(false)
-        // }
     }
 
 
@@ -86,17 +76,6 @@ const Navbar = ({setSingleItem, singleItem, setUpdateItem, updateItem, setAddIte
                 </a>
                 </li>
             </ul>
-          {/* <div className="buttons">
-            <a href="" className="btn btn-outline-dark">
-              <i className="fa fa-sign-in me-1"></i> Login
-            </a>
-            <a href="" className="btn btn-outline-dark ms-2">
-              <i className="fa fa-user-plus me-1"></i> Register
-            </a>
-            <a href="" className="btn btn-outline-dark ms-2" onClick={() => setIsCart(true)}>
-              <i className="fa fa-shopping-cart me-1"></i> Cart ({state.length})
-            </a>
-          </div> */}
           <Login />
           <Signup />
           <CartBtn setIsCart={setIsCart}/>

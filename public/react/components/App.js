@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { ItemList } from './ItemList';
-import { Item } from "./Item";
 import { SingleItem } from "./SingleItem";
 import { Form } from "./Form";
 import Navbar from './NavBar';
 import Home from './Home';
 import {Switch, Route, Routes} from "react-router-dom";
 import Cart from './Cart';
-import { NavLink } from 'react-router-dom';
+import About from './About';
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
-import { compose } from 'redux';
-import About from './About';
-import ShowProducts from './ShowProducts';
-// import Skeleton from "react-loading-skeleton";
-
-
-
 
 export const App = () => {
 
@@ -71,52 +62,8 @@ export const App = () => {
 	  
 		  getProducts();
 		}, []);
-	  
-		// const Loading = () => {
-		// 	return (
-		// 	<>
-		// 		<div className="col-md-3">
-		// 			<Skeleton height={400}/>
-		// 		</div>
-		// 		<div className="col-md-3">
-		// 			<Skeleton height={400}/>
-		// 		</div>
-		// 		<div className="col-md-3">
-		// 			<Skeleton height={400}/>
-		// 		</div>
-		// 		<div className="col-md-3">
-		// 			<Skeleton height={400}/>
-		// 		</div>
-		// 	</>
-		// 	);
-		//   };
 
 
-
-
-
-
-
-
-
-	
-	// async function fetchItems(){
-	// 	try {
-	// 		const response = await fetch(`${apiURL}/items`);
-	// 		const itemsData = await response.json();
-			
-	// 		setItems(itemsData);
-	// 		// setFilter(await response.json())
-	// 	} catch (err) {
-	// 		console.log("Oh no an error! ", err)
-	// 	}
-	// }
-
-
-	// useEffect(() => {
-	// 	fetchItems();
-	// 	// setLoading(true);
-	// }, []);
 
 	const fetchItemData = async (item) => {
 		const res = await fetch (`${apiURL}/items/${item.id}`);
@@ -167,10 +114,6 @@ export const App = () => {
 	  );
 	};
 
-	// 	useEffect(() => {
-	// 	ShowProducts();
-	// }, []);
-
 	return (
 		<>
 		<main>
@@ -207,15 +150,8 @@ export const App = () => {
       					</div>
 
 						<div className='row justify-content-center container-fluid'>
-							{/* instead of shoeProducts - from up above - create a button where it can lead to choosing a category???????????? */}
-							{/* <Category /> */}
 						</div>
-
-						{/* <div className="container d-flex flex-wrap">
-							<ItemList items={items} fetchItemData={fetchItemData}/>
-						</div> */}
 						<div className="container d-flex flex-wrap">
-						{/* {loading ? <Loading /> : <ShowProducts items={items} fetchItemData={fetchItemData}/>} */}
 						<ShowProducts items={items} fetchItemData={fetchItemData}/>
 						</div>
 					</section>
