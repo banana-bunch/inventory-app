@@ -3,63 +3,73 @@ import React, {useState} from "react";
 import apiURL from '../api';
 import Navbar from "./NavBar";
 
-export function Update ({singleItem, setSingleItem, updateItem, setUpdateItem}) {
-
-    const [title, setTitle] = useState(singleItem.title);
-    const [price, setPrice] = useState(singleItem.price);
-
-    const [description, setDescription] = useState(singleItem.description);
-    const [category, setCategory] = useState(singleItem.category);
-
-    const [image, setImage] = useState(singleItem.image);
-
-    const [rating, setRating] = useState(singleItem.rating);
+export function Form ({addItems, setAddItems, items, setItems}) {
 
 
-    const handleUpdate = async (event) => {
-        window.location.reload(false)
-        try{
+    const [title, setTitle] = useState("");
+    const [price, setPrice] = useState("price: ", 0.00);
+
+    const [description, setDescription] = useState("");
+    const [category, setCategory] = useState("");
+
+    const [image, setImage] = useState("");
+
+    const [rating, setRating] = useState("rating", 0);
+
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-            const response = await fetch(`${apiURL}/items/${singleItem.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            body: JSON.stringify({
-            // our NEW/UPDATED data here
+        try {
+        const response = await fetch(`${apiURL}/items`, {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+            {
                 title: title,
                 price: price,
                 description: description,
                 category: category,
                 image: image,
                 rating: rating
-            })
-        })
-            const data = await response.json();
+            }
+            )
+          });
+          const data = await response.json();
+
+        //   console.log(data.title)
+        //   I need bottom code if not I have to manually refresh to see the new submitted page
+        // ! React expects a completely new value - I need to use spread syntax to render a new array (new array will have brand new item created when clicking the submit button)
+          setItems([...items,
+                data
+            ]);
 
             setTitle("");
             setPrice("");
             setDescription("");
             setCategory("");
             setImage("");
-            setRating("");
+            setRating("")
 
-            setUpdateItem(false);
-            setSingleItem(false);
+            setAddItems(false)
 
         } catch (err) {
-            console.log("update error", err)
-        }
-        
-    }
+            console.log("form error", err)
+        }  
+
+        setAddItems(false)
+
+
+	  }
 
     return (
         <>
-            <Navbar setUpdateItem={setUpdateItem} setSingleItem={setSingleItem} updateItem={updateItem}/>
+             <Navbar setAddItems={setAddItems} addItems={addItems}/>
             <div className="container d-flex flex-column justify-content-center align-items-center my-5">
-                <h2 className="my-3">Update an Item</h2>
+                <h2 className="my-3">Add an Item</h2>
 
-                <form className="row g-4" onSubmit={handleUpdate}>
+                <form className="row g-4" onSubmit={handleSubmit} >
                     <div className="col-md-9">
                         <label htmlFor="inputTitle" className="form-label">Title</label>
                         <input type="text" className="form-control" id="inputTitle" placeholder="Title" value={title} onChange={event => setTitle(event.target.value)} required/>
@@ -84,12 +94,15 @@ export function Update ({singleItem, setSingleItem, updateItem, setUpdateItem}) 
                         <label htmlFor="inputRating" className="form-label">Rating</label>
                         <input type="number" min="0" step="any" className="form-control" id="inputRating" placeholder="Rating" value={rating} onChange={event => setRating(event.target.value)} required/>
                     </div>
-                    <div className="my-3">
-                        <button type="submit" className="btn btn-primary px-4 py-2">Update Item!</button>
-                        <button className="btn btn-primary px-4 py-2 ms-3" onClick={() => setUpdateItem(false)}>Back to Item</button>
+                    <div className="col-md-2">
+                        <button type="submit" className="btn btn-primary px-4 py-2">Add Item!</button>
+                    </div>
+                    <div className="col-md-2 my-n5">
+                        <button className="btn btn-primary px-4 py-2" onClick={() => setAddItems(false)}>Back to Inventory</button>
                     </div>
                 </form>
             </div>
+
         </>
-    )
+    ) 
 };
