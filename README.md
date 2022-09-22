@@ -9,18 +9,21 @@ A full-stack application to track your inventory
 4. `npm run server-dev`
 5. In a seperate terminal, `npm run client-dev`
 
+
 ### Desription of Product
-Interactive website for organizong inventory of clothing and accessories
+Interactive website for organizing inventory of clothing and accessories
 You can:
 Add items
 Delete items
-Update pricing
+Update items
+Filter items via category
+Add items to cart
 
 
 
 
 #### Future features coming soon!
-Update your inventory on the go! The mobile app is coming!
+Checkout function coming soon! The mobile app is coming!
 Get notified when your inventory is getting low so you can purchase more or replace it with another item!
 
 
@@ -29,7 +32,7 @@ Get notified when your inventory is getting low so you can purchase more or repl
 
 ##### Contributors:
 
-Kharmalina Tong(Kharmalina),
-Rita Frias(rfrias8),
-David "Kadie" Johnstun(kadiejohnstun),
-Sharee Poquette(nukandtudasmom)
+Kharmalina Tong (Kharmalina),
+Rita Frias (rfrias8),
+David "Kadie" Johnstun (kadiejohnstun),
+Sharee Poquette (nukandtudasmom)
