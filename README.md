@@ -10,7 +10,7 @@ A full-stack application to track your inventory
 5. In a seperate terminal, `npm run client-dev`
 
 
-### Desription of Product
+### Description of Product
 Interactive website for organizing inventory of clothing and accessories
 You can:
 Add items
